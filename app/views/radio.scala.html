@@ -1,0 +1,16 @@
+@(pname: String, ptext: String, pvalues: List[String])
+<div class="col-md-4">
+    <div class="jumbotron">
+        <img alt="Bootstrap Image Preview" src="/assets/os.jpg" class="img-circle" />
+        <label for="@pname">
+            @ptext
+        </label>
+        <div class="radio">
+            <label>
+                @for(t <- 0 to pvalues.length -1){
+                    <input name="@pname" value="@pvalues(t)" type="radio" /> @pvalues(t) <br />
+                }
+            </label>
+        </div>
+    </div>
+</div>

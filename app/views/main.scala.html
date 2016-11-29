@@ -1,0 +1,14 @@
+@(p: Map[String,String])
+<html>
+    <head>
+        <title>Result</title>
+    </head>
+    <body>
+    @for(t <- p.keys) {
+    <li>
+        @t
+        @p(t)
+    </li>
+    }
+    </body>
+</html>

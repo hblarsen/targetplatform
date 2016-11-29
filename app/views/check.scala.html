@@ -1,0 +1,14 @@
+@(pname: String, ptext: String)
+<div class="col-md-4">
+    <div class="jumbotron">
+        <img alt="Bootstrap Image Preview" src="/assets/ram.jpg" class="img-circle" />
+
+        <label for="@pname">
+            @ptext
+        </label>
+
+        <div class="checkbox">
+            <label><input type="checkbox" name="@pname" checked="">@pname</label>
+        </div>
+    </div>
+</div>

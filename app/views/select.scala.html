@@ -1,0 +1,19 @@
+@(pname: String, ptext: String)
+<div class="col-md-4">
+    <div class="jumbotron">
+        <img alt="Bootstrap Image Preview" src="/assets/ram.jpg" class="img-circle" />
+
+        <label for="@pname">
+            @ptext
+        </label>
+
+        <div class="btn-group">
+            <select name="@pname" class="form-control" id="sel1">
+                <option value="120">120</option>
+                <option value="240">240</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+@import models.validation.DataObject
+@(pdata: DataObject, pstatus: String)
+<html>
+<head>
+    <title>Configuration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="jumbotron">
+                <p>
+                    Basic configurator
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                </p>
+                <p>
+                Status: @pstatus
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <form role="form" class="form" method="post" action="@routes.Application.parseRequest()">
+                <div class="row">
+                    <div class="form-group">
+                        @for(p <- 0 to pdata.length-1){
+
+                            @if(pdata.getType(p) == 1){
+                                @radio(pdata.getParam(p)._1, pdata.getParam(p)._2, pdata.getList(p))
+                            }
+                            @if(pdata.getType(p) == 2){
+                                @select(pdata.getParam(p)._1, pdata.getParam(p)._2)
+                            }
+                            @if(pdata.getType(p) == 3){
+                                @check(pdata.getParam(p)._1, pdata.getParam(p)._2)
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <input type="submit" value="Save Config" class="btn btn-default">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
