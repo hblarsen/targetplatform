@@ -1,20 +1,22 @@
 package controllers
 
 import play.api.mvc._
-import models.validation.DataObject
+import models.validation._
 
-import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 object Application extends Controller {
 
+  // Change class type to concrete instance of IValidator
+  val dao: DataObject = new DataObject(CarValidator)
+
   def productconfig = Action {
-    Ok(views.html.productconfig(new DataObject, "-"))
+    Ok(views.html.productconfig(dao, "-"))
   }
 
   def parseRequest = Action { implicit request =>
     //TODO make recursive
-    val dao: DataObject = new DataObject
+
     var currentConfig = Map.empty[String, String]
 
     var pfields = new ListBuffer[String]()

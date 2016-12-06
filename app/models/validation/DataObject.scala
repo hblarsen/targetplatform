@@ -1,11 +1,10 @@
 package models.validation
-import models.validation.Validator.{BoolType, EnumType, InputType, IntType}
 
 // Thin wrapper around the Validator with a few helpers for the templates
 
-class DataObject() {
+class DataObject(v: Val) {
 
-  def length: Integer = Validator.features.length
+  def length: Integer = v.features.length
 
   def getType(i: Integer): Integer = {
     val p = getParam(i)
@@ -18,7 +17,7 @@ class DataObject() {
 
   def getList(i: Integer): List[String] = {
     if(getType(i) == 1){
-      Validator.features(i)._3.asInstanceOf[EnumType].vals
+      v.features(i)._3.asInstanceOf[EnumType].vals
     }
     else {
       List("")
@@ -26,12 +25,12 @@ class DataObject() {
   }
 
   def getParam(i: Integer): (String, String, InputType) = {
-    Validator.features(i)
+    v.features(i)
   }
 
   def validate(m: Map[String, String]) : Option[String] = {
-    if( !Validator.validate(m) ){
-      Validator.validationOption(m)
+    if( !v.validate(m) ){
+      v.validationOption(m)
     }
     else {
       Some("OK")

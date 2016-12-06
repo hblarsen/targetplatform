@@ -1,12 +1,7 @@
 package models.validation
 
-
-object Validator
+object PcValidator extends Val
 {
-	sealed trait InputType
-	case class IntType() extends InputType
-	case class BoolType() extends InputType
-	case class EnumType(vals:List[String]) extends InputType
 
 	def features :List[(String, String, InputType)] = 
 		List(
@@ -16,8 +11,6 @@ object Validator
 			("HDSize", "Choose the amount of memory", IntType()),
 			("HDMI", "Do you want an hdmi port?", BoolType())
 		)
-
-	def hi = "Hi"
 
 	def validate (m:Map[String,String]) :Boolean = 
 	{
