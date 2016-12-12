@@ -29,6 +29,7 @@ object Application extends Controller {
     }
 
     val status = dao.validate(currentConfig)
+
     println(status)
 
     //Ok(views.html.main(currentConfig))

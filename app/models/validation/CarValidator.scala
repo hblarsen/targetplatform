@@ -6,11 +6,11 @@ object CarValidator extends Val
   def features :List[(String, String, InputType)] =
     List(
       ("Fuel", "Choose a fuel type", EnumType(List(  "Diesel" ,  "Gasoline" ,  "Electric"  ))),
-      ("Rims", "Choose rims type", EnumType(List(  "Aluminum" ,  "Other"  ))),
-      ("RimsColor", "Choose rims color", EnumType(List(  "MatteBlack" ,  "Red"  ))),
+      ("Rims", "Choose rims type", EnumType(List(  "Aluminum" , "Cast Iron", "Other"  ))),
+      ("RimsColor", "Choose rims color", EnumType(List(  "MatteBlack" , "Silver", "Red"  ))),
       ("EnginePower", "Choose the power", IntType()),
-      ("HeatedSeats", "Do you want heated seats?", BoolType()),
-      ("ElectricWindows", "Do you want electric windows? ", BoolType())
+      ("HeatedSeats", "Choose heated seats?", BoolType()),
+      ("ElectricWindows", "Electric windows? ", BoolType())
     )
 
   def validate (m:Map[String,String]) :Boolean =

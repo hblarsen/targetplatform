@@ -9,14 +9,14 @@ class DataObject(v: Val) {
   def getType(i: Integer): Integer = {
     val p = getParam(i)
     p._3 match {
-      case _ : EnumType => 1
-      case _ : IntType => 2
-      case _ : BoolType => 3
+      case _: EnumType => 1
+      case _: IntType => 2
+      case _: BoolType => 3
     }
   }
 
   def getList(i: Integer): List[String] = {
-    if(getType(i) == 1){
+    if (getType(i) == 1) {
       v.features(i)._3.asInstanceOf[EnumType].vals
     }
     else {
@@ -28,12 +28,7 @@ class DataObject(v: Val) {
     v.features(i)
   }
 
-  def validate(m: Map[String, String]) : Option[String] = {
-    if( !v.validate(m) ){
-      v.validationOption(m)
-    }
-    else {
-      Some("OK")
-    }
+  def validate(m: Map[String, String]): String = {
+    v.getError(m)
   }
 }
