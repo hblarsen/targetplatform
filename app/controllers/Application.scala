@@ -3,51 +3,32 @@ package controllers
 import play.api.mvc._
 import models.validation._
 
-import scala.collection.mutable.ListBuffer
-
+//main controller for the configuration application
 object Application extends Controller {
 
-  // Change class type to concrete instance of IValidator
-  val dao: DataObject = new DataObject(CarValidator)
+  val v: IValidator = CarValidator
 
+  //generates default product configuration view
   def productconfig = Action {
-    Ok(views.html.productconfig(dao, "-"))
+    Ok(views.html.productconfig(v, "-"))
   }
 
+  //validate configuration and generate status view
   def parseRequest = Action { implicit request =>
-    //TODO make recursive
-
-    var currentConfig = Map.empty[String, String]
-
-    var pfields = new ListBuffer[String]()
-
-    for( t <- 0 to dao.length - 1 ){
-      pfields += dao.getParam(t)._1
-    }
-    for( p <- pfields ) {
-      currentConfig += (p -> request.body.asFormUrlEncoded.get(p).head)
-    }
-
-    val status = dao.validate(currentConfig)
-
-    println(status)
-
-    //Ok(views.html.main(currentConfig))
-    Ok(views.html.productconfig(dao, status.toString))
+    val status = v.validate(confBuilder(0,v.length,Map.empty[String,String], request))
+    Ok(views.html.productconfig(v, status.toString))
   }
 
+  //builds map with selected configuration values from request
+  def confBuilder(i: Int, featureCount: Int, confMap: Map[String, String], r: Request[AnyContent] ):
+      Map[String, String] = {
+
+    val paramName: String = v.getParam(i)._1
+    val paramVal: String = r.body.asFormUrlEncoded.get(paramName).head
+    val cm = confMap ++ Map( paramName -> paramVal )
+    if( i <= featureCount-1 ){
+      confBuilder( i+1, featureCount, cm, r )
+    }
+    cm
+  }
 }
-///////////////////////////////////////////////////////////////////////////////
-/*
-
-  // Not used
-  def validate = Action { implicit request =>
-    val ConfigData = ConfigForm.bindFromRequest.get
-    //val params = Seq(ConfigData)
-    Ok(views.html.result(ConfigData))
-  }
-
-  def ConfigForm = Form(mapping("os" -> text, "hd" -> text, "ram" -> text)(ConfigData.apply)(ConfigData.unapply))
-  case class ConfigData(os: String, hd: String, ram: String)
-
- */

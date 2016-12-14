@@ -1,6 +1,7 @@
+//generated code
 package models.validation
 
-object CarValidator extends Val
+object CarValidator extends IValidator
 {
 
   def features :List[(String, String, InputType)] =
