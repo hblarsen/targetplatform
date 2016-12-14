@@ -28,13 +28,14 @@ object CarValidator extends IValidator
   {
     validationOption(m) match
     {
-      case None => ""
+      case None => "OK"
       case Some(e) => e
     }
   }
 
   def validationOption (m:Map[String,String]) :Option[String] =
   {
+    println(m)
     if( (m("RimsColor")=="MatteBlack")  && !(( (m("Rims")=="Aluminum")  && ( (m("EnginePower")=="120")  ||  (m("EnginePower")=="150") ))))
       Some("RimsColor can only be MatteBlack if Rims is Aluminum and EnginePower is 120 or 150")
     else if( (m("HeatedSeats")=="true")  && !(( (m("Fuel")=="Diesel")  &&  (m("EnginePower")=="150") )))

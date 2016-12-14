@@ -15,7 +15,7 @@ object Application extends Controller {
 
   //validate configuration and generate status view
   def parseRequest = Action { implicit request =>
-    val status = v.validate(confBuilder(0,v.length,Map.empty[String,String], request))
+    val status = v.validateConf( confBuilder(0, v.length, Map.empty[String,String], request) )
     Ok(views.html.productconfig(v, status.toString))
   }
 
@@ -26,9 +26,12 @@ object Application extends Controller {
     val paramName: String = v.getParam(i)._1
     val paramVal: String = r.body.asFormUrlEncoded.get(paramName).head
     val cm = confMap ++ Map( paramName -> paramVal )
-    if( i <= featureCount-1 ){
+    //println(cm)
+    if( i < featureCount-1 ){
       confBuilder( i+1, featureCount, cm, r )
     }
-    cm
+    else {
+      cm
+    }
   }
 }
