@@ -6,16 +6,20 @@ import models.validation._
 //main controller for the configuration application
 object Application extends Controller {
 
-  val v: IValidator = CarValidator
+  //Validator type is set here (could be loaded from config)
+  //val v: IValidator = CarValidator
+  val v: IValidator = PcValidator
+  var c = UserConfiguration
 
   //generates default product configuration view
   def productconfig = Action {
     Ok(views.html.productconfig(v, "-"))
   }
 
-  //validate configuration and generate status view
+  //validate submitted configuration and generate text for status view
   def parseRequest = Action { implicit request =>
-    val status = v.validateConf( confBuilder(0, v.length, Map.empty[String,String], request) )
+    val c = new UserConfiguration( confBuilder(0, v.length, Map.empty[String,String], request) )
+    val status = v.validateConf( c.read() )
     Ok(views.html.productconfig(v, status.toString))
   }
 

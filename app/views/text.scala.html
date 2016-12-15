@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+@(pname: String, ptext: String)
+<div class="col-md-4">
+    <div class="jumbotron">
 
-</body>
-</html>
+        <label for="@pname">
+            @ptext
+        </label>
+
+        <div class="textbox">
+            <label><input type="textbox" name="@pname" value="0"></label>
+        </div>
+    </div>
+</div>

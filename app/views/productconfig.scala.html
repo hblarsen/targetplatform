@@ -35,10 +35,10 @@
                                 @radio(pdata.getParam(p)._1, pdata.getParam(p)._2, pdata.getList(p))
                             }
                             @if(pdata.getType(p) == 2){
-                                @select(pdata.getParam(p)._1, pdata.getParam(p)._2)
+                                @text(pdata.getParam(p)._1, pdata.getParam(p)._2)
                             }
                             @if(pdata.getType(p) ==     3){
-                                @check(pdata.getParam(p)._1, pdata.getParam(p)._2)
+                                @onoff(pdata.getParam(p)._1, pdata.getParam(p)._2)
                             }
                         }
                     </div>
