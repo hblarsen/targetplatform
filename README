@@ -1,0 +1,29 @@
+README File
+Updated: 15.12.2016
+This file contains basic project information
+
+Project name: TargetPlatform
+Project type: Play-Scala web application (MVC)
+Test API: Specs2 (Build-in)
+
+Initialization of play application requires Activator:
+Activator installation: https://www.lightbend.com/activator/download
+Activator template: just-play-scala
+
+Run command:
+Activator run
+
+Test command:
+Activator test
+
+Project Structure:
+/app/models
+/app/models/validation
+/app/views
+/app/controllers
+/test
+
+Special files
+/build.sbt
+/conf/routes
+

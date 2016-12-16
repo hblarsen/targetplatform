@@ -1,11 +1,8 @@
 package models.validation
 
-/**
-  * Created by HEBL on 15-12-2016.
-  */
+//dummy configuration class - persistence layer goes here
 case class UserConfiguration( currentConfig: Map[String,String] ){
 
-  //dummy configuration class
   write(currentConfig)
 
   def read(): Map[String,String] = {

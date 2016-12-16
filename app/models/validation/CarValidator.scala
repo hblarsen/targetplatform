@@ -23,7 +23,6 @@ object CarValidator extends IValidator
     }
   }
 
-
   def getError (m:Map[String,String]) :String =
   {
     validationOption(m) match
@@ -39,9 +38,9 @@ object CarValidator extends IValidator
     if( (m("RimsColor")=="MatteBlack")  && !(( (m("Rims")=="Aluminum")  && ( (m("EnginePower")=="120")  ||  (m("EnginePower")=="150") ))))
       Some("RimsColor can only be MatteBlack if Rims is Aluminum and EnginePower is 120 or 150")
     else if( (m("HeatedSeats")=="true")  && !(( (m("Fuel")=="Diesel")  &&  (m("EnginePower")=="150") )))
-      Some("Heated seats are only possible on vehicle with 150 HP Diesel engine")
+      Some("Heated seats are not possible on vehicle with 150 HP Diesel engine")
     else if( (m("ElectricWindows")=="true")  && !(( (m("Rims")=="Other")  ||  (m("Fuel")=="Gasoline") )))
-      Some("Electric windows only possible on a vehicle with Gasoline Engine and Rim Type other")
+      Some("Electric windows is only possible on a vehicle with Gasoline Engine or Rim Type other")
     else
       None
   }

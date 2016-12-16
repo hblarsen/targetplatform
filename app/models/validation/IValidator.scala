@@ -7,6 +7,7 @@ case class EnumType(vals:List[String]) extends InputType
 
 //Interface for code generated configurations with a few helpers for the template engine
 trait IValidator {
+
   def features :List[(String, String, InputType)]
   def validate (m:Map[String,String]) :Boolean
   def getError (m:Map[String,String]) :String
